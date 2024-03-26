@@ -92,14 +92,14 @@ viUninstallHandler()
 |<center>操作名</center>|<center>操作方法</center>|操作内容|
 |:-|:-|:-:|
 |`viAssertIntrSignal`|`ViStatus = ViAssertIntrSignal(ViSession vi, Vint16 mode, ViUint32 statusID)`|插入给定的中断或信号
-|`viAssertTrigger`||插入软件或硬件触发
-|`viAssertUtilSignal`||插入或取消插入给定的通用总线信号
-|**`viBufRead`**||通过格式化I/O读取缓存从设备或接口读取数据
-|**`viBufWrite`**||同步向格式化I/O写入缓存写入数据
-|**`viClear`**||清空一个设备
-|`viclose`||关闭指定的会话、事件或查找表
-|`viDisableEvent`||通过指定的机制取消指定事件类型的通知
-|`viDiscardEvents`||对会话中的特定事件类型和机制抛弃事件产生
+|`viAssertTrigger`|`ViStatus = viAssertTriger(Visession vi, ViUInt16 protocol)`|插入软件或硬件触发
+|`viAssertUtilSignal`|`viStatus = viAssertUtilSignal(ViSession vi, ViUint16 line)`|插入或取消插入给定的通用总线信号
+|**`viBufRead`**|`ViStatus viBufRead(ViSession vi, ViPBuf buf, ViUInt32 count, ViPUint32 retCount)`|通过格式化I/O读取缓存从设备或接口读取数据
+|**`viBufWrite`**|`ViStatus viBufWrite(ViSession vi, ViBuff buf, ViUInt32, count, ViPUInt32 retcount)`|同步向格式化I/O写入缓存写入数据
+|**`viClear`**|`ViStatus viClear(Visession vi)`|清空一个设备
+|`viClose`|`ViStatus viClose(ViObject vi)`|关闭指定的会话、事件或查找表
+|`viDisableEvent`|`ViStatus viDisableEvent(ViSession vi, ViEventType eventType, ViUInt16 mechanism)`|通过指定的机制取消指定事件类型的通知
+|`viDiscardEvents`|`ViStatus viDiscardEvents(ViSession vi, Vi, ViEventType eventType, ViUInt16 Mechanism)`|对会话中的特定事件类型和机制抛弃事件产生
 |`viEnableEvent`||激活指定的事件的通知
 |`viEventHandler`||事件服务句柄处理协议
 |`viFindNext`||
