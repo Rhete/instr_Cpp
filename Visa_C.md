@@ -46,7 +46,7 @@ ViSetAttribute()
 
 **操作**是由可以被所给**资源**执行的**资源**定义的行为。每个资源有定义一系列操作的能力。除了被各个**资源**定义的**操作**，以下操作模板可以在任何**资源**中被使用：
 
-```VB
+```C
 viClose()
 viGetAttribute()
 viSetAttribute()
@@ -88,12 +88,85 @@ viUninstallHandler()
 
 # 操作
 
+## 操作总表
+||<center>操作名</center>||操作内容||
+|:-:|:-|:-:|:-:|:-:|
+||`viAssertIntrSignal`|&emsp;&emsp;|插入给定的中断或信号
+||`viAssertTrigger`||插入软件或硬件触发
+||`viAssertUtilSignal`||插入或取消插入给定的通用总线信号
+||**`viBufRead`**||通过格式化I/O读取缓存从设备或接口读取数据
+||**`viBufWrite`**||同步向格式化I/O写入缓存写入数据
+||**`viClear`**||清空一个设备
+||`viclose`||关闭指定的会话、事件或查找表
+||`viDisableEvent`||通过指定的机制取消指定事件类型的通知
+||`viDiscardEvents`||
+||`viEnableEvent`||
+||`viEventHandler`||
+||`viFindNext`||
+||`viFindRsrc`||
+||`viFlush`||
+||`viGetAttribute`||
+||`viGpibCommand`||
+||`viGpibControlATN`||
+||`viGpibControlREN`||
+||`viGpibPassControl`||
+||`viGpibSendIFC`||
+||`viln8`/`viln16`/`viln32`||
+||`viInstallHandler`||
+||`viLock`||
+||`viMapAddress`||
+||`viMapTrigger`||
+||`viMenAlloc`||
+||`viMemFree`||
+||`viMove`||
+||`viMoveAsync`||
+||`viMoveln8`/<br>`viMoveln16`/<br>`viMoveln32`||
+||`viMoveOut8`/<br>`viMoveOut16`/<br>`viMoveOut32`||
+||**`viOpen`**||
+||**`viOpenDefaultRM`**||
+||`viOut8`/`viOut16`/<br>`viOut32`||
+||`viParseRsrc`||
+||`viParseRsrcEx`||
+||`viPeek8`/`viPeek16`/<br>`viPeek32`||
+||`viPock8`/`viPock16`/<br>`viPock32`||
+||`viPrintf`||
+||`viQueryf`||
+||`viRead`||
+||`viReadAsync`||
+||`viReadSTB`||
+||`viReadToFile`||
+||`viScanf`||
+||`viSetAttribute`||
+||`viSetBuf`||
+||`viSPrintf`||
+||`viSScanf`||
+||`viStatusDesc`||
+||`viTerminate`||
+||`viUninstallHandler`||
+||`viUnlock`||
+||`viUnmapAddress`||
+||`viUnmapTrigger`||
+||`viUsbControlln`||
+||`viUsbControlout`||
+||`viVPrintf`||
+||`viVQueryf`||
+||`viVScanf`||
+||`viVSPrintf`||
+||`viVSScanf`||
+||`viVxiCommandQuery`||
+||`viWaitOnEvent`||
+||`viWrite`||
+||`viWriteAsync`||
+||`viWriteFromFile`||
+
+
+
 ## `viAssertIntrSignal`
 
 插入具体的中断或信号
 
 **C code**
-``` C
+``` C 
 Vistatus = viAssertIntrSignal(ViSession vi, ViInt16 mode, ViUInt32 statusID)
 ```
 
@@ -128,3 +201,4 @@ Vistatus = viAssertIntrSignal(ViSession vi, ViInt16 mode, ViUInt32 statusID)
 ||`VI_ASSERT_USE_ASSIGNED`||采用本地仪器指定的通知方式||
 ||`VI_ASSERT_SIGNAL`||通过**VXI**信号发送通知||
 ||`VI_ASSERT_IRQ1` –<br>`VI_ASSERT_IRQ7`||通过指定的**VXI/VME IRQ**线路发送中断信号，该命令使用了标准的**VXI/VME ROAK**中断机制，而不是更老的**VME RORA**机制||
+

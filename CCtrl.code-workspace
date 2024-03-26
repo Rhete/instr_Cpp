@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"visa.h": "c",
+			"visatype.h": "c",
+			"limits.h": "c"
+		}
+	}
+}
