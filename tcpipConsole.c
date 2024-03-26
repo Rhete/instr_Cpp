@@ -19,7 +19,47 @@
 static ViStatus status;
 static ViSession defaultRM, instr1;
 
+void ErrCodePrt(ViStatus status){
+    switch (status)
+    {
+    case VI_ERROR_NSUP_MODE: 
+        printf("VISA工具不支持给定的模式！\n");
+        break;
+    
+    case VI_ERROR_NSUP_INTR:
+        printf("中断要求等级过高或不满足要求的状态ID值！\n");
+        break;
 
+    case VI_ERROR_INV_MODE:
+        printf("mode参数值无效！\n");
+        break;
+
+    case VI_ERROR_INTR_PENDING:
+        printf("上次请求的中断仍处于待定状态!\n");
+        break;
+
+    case VI_ERROR_BERR:
+        printf("传输过程中总线错误！\n");
+        break;
+
+    case VI_ERROR_RSRC_LOCKED:
+        printf("特定的操作由于目标资源禁止访问而无法执行！\n");
+        break;
+        
+    case VI_ERROR_NSUP_OPER:
+        printf("目标资源不支持此操作！\n");
+        break;
+
+    case VI_ERROR_INV_OBJECT:
+        printf("目标无效！\n");
+        break;
+
+    default :
+        printf("未知的错误类型\n");
+        break;
+    }
+    return ;
+}
 
 
 
@@ -33,7 +73,12 @@ int main()
         exit (EXIT_FAILURE);
     }  
 
-
+    status = viOpen(defaultRM, ViConstRsrc_name, ViAccessMode_mode, ViUInt32_timeout, ViPSession_vi);
+    if(status < VI_SUCCESS)
+    {
+        printf("Could not open instrument!\n");
+        exit (EXIT_FAILURE);
+    }
     
     return 0;
 }

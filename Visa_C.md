@@ -99,16 +99,32 @@ Vistatus = viAssertIntrSignal(ViSession vi, ViInt16 mode, ViUInt32 statusID)
 
 ### 参数
 
-|参数名|传递方向|描述|
-|:--:|:--:|:--:|
-|vi|入|会话的唯一逻辑标识符|
-|mode|入|说明如何插入终端，实际值详见***描述***部分|
-|statusID|入|中断确认周期中状态值的呈现，有效值详见***描述***部分|
+||参数名||传递方向||描述||
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+||vi||入||会话的唯一逻辑标识符||
+||mode||入||说明如何插入终端，实际值详见***描述***部分||
+||statusID||入||中断确认周期中状态值的呈现，有效值详见***描述***部分||
 
 ### 返回值
 
-|完成代码|描述|
-|:--:|:--:|
-|`VI_SUCCESS`|成功完成操作|
+||完成代码||描述||
+|:-:|:--:|:-:|:-:|:-:|
+||`VI_SUCCESS`|&emsp;|成功完成操作||
+||`VI_ERROR_INV_OBJECT`||目标无效||
+||`VI_ERROR_NSUP_OPER`||目标不支持此操作||
+||`VI_ERROR_RSRC_LOCKED`||目标资源禁止访问，无法执行操作||
+||`VI_ERROR_BERR`||传输过程中总线错误||
+||`VI_ERROR_INTR_PENDING`||上次请求的中断仍处于待定状态||
+||`VI_ERROR_INV_MODE`||mode参数值无效||
+||`VI_ERROR_NSUP_INTR`||中断要求等级过高或不满足要求的状态ID值||
+||`VI_ERROR_NSUP_MODE`||VISA工具不支持给定的模式||
 
+### 描述
 
+此操作可用于插入设备的中断状态。例如，在VXI中，此操作即可由VXI信号执行，也可以由VXI中断执行。对于某些总线类型，`statusID`参数可以忽略。下表给出了**mode**参数的有效值。
+
+||**Mode**||**操作描述**||
+|:-:|:-:|:-:|:-:|:-:|
+||`VI_ASSERT_USE_ASSIGNED`||采用本地仪器指定的通知方式||
+||`VI_ASSERT_SIGNAL`||通过**VXI**信号发送通知||
+||`VI_ASSERT_IRQ1` –<br>`VI_ASSERT_IRQ7`||通过指定的**VXI/VME IRQ**线路发送中断信号，该命令使用了标准的**VXI/VME ROAK**中断机制，而不是更老的**VME RORA**机制||
