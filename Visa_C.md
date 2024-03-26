@@ -91,76 +91,76 @@ viUninstallHandler()
 ## 操作总表
 |<center>操作名</center>|<center>操作方法</center>|操作内容|
 |:-|:-|:-:|
-|`viAssertIntrSignal`|`ViStatus = ViAssertIntrSignal(ViSession vi, Vint16 mode, ViUint32 statusID)`|插入给定的中断或信号
-|`viAssertTrigger`|`ViStatus = viAssertTriger(Visession vi, ViUInt16 protocol)`|插入软件或硬件触发
-|`viAssertUtilSignal`|`viStatus = viAssertUtilSignal(ViSession vi, ViUint16 line)`|插入或取消插入给定的通用总线信号
-|**`viBufRead`**|`ViStatus viBufRead(ViSession vi, ViPBuf buf, ViUInt32 count, ViPUint32 retCount)`|通过格式化I/O读取缓存从设备或接口读取数据
-|**`viBufWrite`**|`ViStatus viBufWrite(ViSession vi, ViBuff buf, ViUInt32, count, ViPUInt32 retcount)`|同步向格式化I/O写入缓存写入数据
-|**`viClear`**|`ViStatus viClear(Visession vi)`|清空一个设备
-|`viClose`|`ViStatus viClose(ViObject vi)`|关闭指定的会话、事件或查找表
-|`viDisableEvent`|`ViStatus viDisableEvent(ViSession vi, ViEventType eventType, ViUInt16 mechanism)`|通过指定的机制取消指定事件类型的通知
-|`viDiscardEvents`|`ViStatus viDiscardEvents(ViSession vi, Vi, ViEventType eventType, ViUInt16 Mechanism)`|对会话中的特定事件类型和机制抛弃事件产生
-|`viEnableEvent`||激活指定的事件的通知
-|`viEventHandler`||事件服务句柄处理协议
-|`viFindNext`||
-|`viFindRsrc`||
-|`viFlush`||
-|`viGetAttribute`||
-|`viGpibCommand`||
-|`viGpibControlATN`||
-|`viGpibControlREN`||
-|`viGpibPassControl`||
-|`viGpibSendIFC`||
-|`viln8`/`viln16`/`viln32`||
-|`viInstallHandler`||
-|`viLock`||
-|`viMapAddress`||
-|`viMapTrigger`||
-|`viMenAlloc`||
-|`viMemFree`||
-|`viMove`||
-|`viMoveAsync`||
-|`viMoveln8`/<br>`viMoveln16`/<br>`viMoveln32`||
-|`viMoveOut8`/<br>`viMoveOut16`/<br>`viMoveOut32`||
-|**`viOpen`**||
-|**`viOpenDefaultRM`**||
-|`viOut8`/`viOut16`/<br>`viOut32`||
-|`viParseRsrc`||
-|`viParseRsrcEx`||
-|`viPeek8`/`viPeek16`/<br>`viPeek32`||
-|`viPock8`/`viPock16`/<br>`viPock32`||
-|`viPrintf`||
-|`viQueryf`||
-|`viRead`||
-|`viReadAsync`||
-|`viReadSTB`||
-|`viReadToFile`||
-|`viScanf`||
-|`viSetAttribute`||
-|`viSetBuf`||
-|`viSPrintf`||
-|`viSScanf`||
-|`viStatusDesc`||
-|`viTerminate`||
-|`viUninstallHandler`||
-|`viUnlock`||
-|`viUnmapAddress`||
-|`viUnmapTrigger`||
-|`viUsbControlln`||
-|`viUsbControlout`||
-|`viVPrintf`||
-|`viVQueryf`||
-|`viVScanf`||
-|`viVSPrintf`||
-|`viVSScanf`||
-|`viVxiCommandQuery`||
-|`viWaitOnEvent`||
-|`viWrite`||
-|`viWriteAsync`||
-|`viWriteFromFile`||
+|[`viAssertIntrSignal`](#Opt1) |`ViStatus = ViAssertIntrSignal(ViSession vi, Vint16 mode, ViUint32 statusID)`|插入给定的中断或信号
+|[`viAssertTrigger`](#Opt2)|`ViStatus = viAssertTriger(Visession vi, ViUInt16 protocol)`|插入软件或硬件触发
+|[`viAssertUtilSignal`](#Opt3)|`viStatus = viAssertUtilSignal(ViSession vi, ViUint16 line)`|插入或取消插入给定的通用总线信号
+|[**`viBufRead`**](#Opt4)|`ViStatus viBufRead(ViSession vi, ViPBuf buf, ViUInt32 count, ViPUint32 retCount)`|通过格式化I/O读取缓存从设备或接口读取数据
+|[**`viBufWrite`**](#Opt5)|`ViStatus viBufWrite(ViSession vi, ViBuff buf, ViUInt32, count, ViPUInt32 retcount)`|同步向格式化I/O写入缓存写入数据
+|[**`viClear`**](#Opt6)|`ViStatus viClear(Visession vi)`|清空一个设备
+|[`viClose`](#Opt7)|`ViStatus viClose(ViObject vi)`|关闭指定的会话、事件或查找表
+|[`viDisableEvent`](#Opt8)|`ViStatus viDisableEvent(ViSession vi, ViEventType eventType, ViUInt16 mechanism)`|通过指定的机制取消指定事件类型的通知
+|[`viDiscardEvents`](#Opt9)|`ViStatus viDiscardEvents(ViSession vi, Vi, ViEventType eventType, ViUInt16 Mechanism)`|对会话中的特定事件类型和机制抛弃事件产生
+|[`viEnableEvent`](#Opt10)|`ViStatus viEnableEvent(ViSession vi, ViEventType eventType, ViUInt16 mechanism, ViEventFilter context)`|激活指定的事件的通知
+|[`viEventHandler`](#Opt11)|`ViStatus _VI_FUNCH viEventHandler(ViSession vi, ViEventType eventType, ViEvent context, ViAddr userHandle)`|事件服务句柄处理协议
+|[`viFindNext`](#Opt12)|`ViStatus viFindNext(ViFindList findList, ViChar instrDesc[])`|返回从上次用`viFindRsrc()`获取的资源列表的下一个资源|
+|[`viFindRsrc`](#Opt13)|`ViStatus viFindRsrc(ViSession sesn, ViString expr, ViPFindList findList, ViPUInt32 retcnt, ViChar instrDesc[])`|询问VISA系统，定位经过特定的接口的资源
+|[**`viFlush`**](#Opt14)|`ViStatus viFlush(ViSession vi, ViUInt16 mask)`|手动清空指定的格式化I/O操作或串口通信的缓存
+|[`viGetAttribute`](#Opt15)||
+|[`viGpibCommand`](#Opt16)||
+|[`viGpibControlATN`](#Opt17)||
+|[`viGpibControlREN`](#Opt18)||
+|[`viGpibPassControl`](#Opt19)||
+|[`viGpibSendIFC`](#Opt20)||
+|[`viIn8`/`viIn16`/`viIn32`](#Opt21)||
+|[`viInstallHandler`](#Opt22)||
+|[`viLock`](#Opt23)||
+|[`viMapAddress`](#Opt24)||
+|[`viMapTrigger`](#Opt25)||
+|[`viMenAlloc`](#Opt26)||
+|[`viMemFree`](#Opt27)||
+|[`viMove`](#Opt28)||
+|[`viMoveAsync`](#Opt29)||
+|[`viMoveIn8`/<br>`viMoveIn16`/<br>`viMoveIn32`](#Opt30)||
+|[`viMoveOut8`/<br>`viMoveOut16`/<br>`viMoveOut32`](#Opt31)||
+|[**`viOpen`**](#Opt32)||
+|[**`viOpenDefaultRM`**](#Opt33)||
+|[`viOut8`/`viOut16`/<br>`viOut32`](#Opt34)||
+|[`viParseRsrc`](#Opt35)||
+|[`viParseRsrcEx`](#Opt36)||
+|[`viPeek8`/`viPeek16`/<br>`viPeek32`](#Opt37)||
+|[`viPock8`/`viPock16`/<br>`viPock32`](#Opt38)||
+|[`viPrintf`](#Opt39)||
+|[`viQueryf`](#Opt40)||
+|[`viRead`](#Opt41)||
+|[`viReadAsync`](#Opt42)||
+|[`viReadSTB`](#Opt43)||
+|[`viReadToFile`](#Opt44)||
+|[`viScanf`](#Opt45)||
+|[`viSetAttribute`](#Opt46)||
+|[`viSetBuf`](#Opt47)||
+|[`viSPrintf`](#Opt48)||
+|[`viSScanf`](#Opt49)||
+|[`viStatusDesc`](#Opt50)||
+|[`viTerminate`](#Opt51)||
+|[`viUninstallHandler`](#Opt52)||
+|[`viUnlock`](#Opt53)||
+|[`viUnmapAddress`](#Opt54)||
+|[`viUnmapTrigger`](#Opt55)||
+|[`viUsbControlIn`](#Opt56)||
+|[`viUsbControlout`](#Opt57)||
+|[`viVPrintf`](#Opt58)||
+|[`viVQueryf`](#Opt59)||
+|[`viVScanf`](#Opt60)||
+|[`viVSPrintf`](#Opt61)||
+|[`viVSScanf`](#Opt62)||
+|[`viVxiCommandQuery`](#Opt63)||
+|[`viWaitOnEvent`](#Opt64)||
+|[`viWrite`](#Opt65)||
+|[`viWriteAsync`](#Opt66)||
+|[`viWriteFromFile`](#Opt67)||
 
 
-## `viAssertIntrSignal`
+## `viAssertIntrSignal`<a id="Opt1"></a>
 
 插入具体的中断或信号
 
@@ -200,4 +200,137 @@ Vistatus = viAssertIntrSignal(ViSession vi, ViInt16 mode, ViUInt32 statusID)
 ||`VI_ASSERT_USE_ASSIGNED`||采用本地仪器指定的通知方式||
 ||`VI_ASSERT_SIGNAL`||通过**VXI**信号发送通知||
 ||`VI_ASSERT_IRQ1` –<br>`VI_ASSERT_IRQ7`||通过指定的**VXI/VME IRQ**线路发送中断信号，该命令使用了标准的**VXI/VME ROAK**中断机制，而不是更老的**VME RORA**机制||
+
+## `viAssertTrigger` <a id="Opt2"></a>
+
+## `viAssertUtilSignal` <a id="Opt3"></a>
+
+## `viBufRead` <a id="Opt4"></a>
+
+## `viBufWrite` <a id="Opt5"></a>
+
+## `viClear` <a id="Opt6"></a>
+
+## `viClose` <a id="Opt7"></a>
+
+## `viDisableEvent` <a id ="Opt8"></a>
+
+## `viDiscardEvents` <a id ="Opt9"></a>
+
+## `viEnableEvent` <a id ="Opt10"></a>
+
+## `viEventHandler` <a id ="Opt11"></a>
+
+## `viFindNext` <a id ="Opt12"></a>
+
+## `viFindRsrc` <a id ="Opt13"></a>
+
+## `viFlush` <a id ="Opt14"></a>
+
+## `viGetAttribute` <a id ="Opt15"></a>
+
+## `viGpibCommand` <a id ="Opt16"></a>
+
+## `viGpibControlATN` <a id ="Opt17"></a>
+
+## `viGpibControlREN` <a id ="Opt18"></a>
+
+## `viGpibPassControl` <a id ="Opt19"></a>
+
+## `viGpibSendIFC` <a id ="Opt20"></a>
+
+## `viIn8/viIn16/viIn32` <a id ="Opt21"></a>
+
+## `viInstallHandler` <a id ="Opt22"></a>
+
+## `viLock` <a id ="Opt23"></a>
+
+## `viMapAddress` <a id ="Opt24"></a>
+
+## `viMapTrigger` <a id ="Opt25"></a>
+
+## `viMemAlloc` <a id ="Opt26"></a>
+
+## `viMemFree` <a id ="Opt27"></a>
+
+## `viMove` <a id ="Opt28"></a>
+
+## `viMoveAsync` <a id ="Opt29"></a>
+
+## `viMoveIn8/viMoveIn16/viMoveIn32` <a id ="Opt30"></a>
+
+## `viMoveOut8/viMoveOut16/viMoveOut32` <a id ="Opt31"></a>
+
+## **`viOpen`** <a id ="Opt32"></a>
+
+## **`viOpenDefaultRM`** <a id ="Opt33"></a>
+
+## `viOut8/viOut16/viOut32` <a id ="Opt34"></a>
+
+## `viParseRsrc` <a id ="Opt35"></a>
+
+## `viParseRsrcEx` <a id ="Opt36"></a>
+
+## `viPeek8/viPeek16/viPeek32` <a id ="Opt37"></a>
+
+## `viPoke8/viPoke16/viPike32` <a id ="Opt38"></a>
+
+## `viPrintf` <a id ="Opt39"></a>
+
+## `viQueryf` <a id ="Opt40"></a>
+
+## `viRead` <a id ="Opt41"></a>
+
+## `viReadAsync` <a id ="Opt42"></a>
+
+## `viReadSTB` <a id ="Opt43"></a>
+
+## `viReadToFile` <a id ="Opt44"></a>
+
+## `viScanf` <a id ="Opt45"></a>
+
+## `viSetAttribute` <a id ="Opt46"></a>
+
+## `viSetBuf` <a id ="Opt47"></a>
+
+## `viSPrintf` <a id ="Opt48"></a>
+
+## `viSScanf` <a id ="Opt49"></a>
+
+## `viStatusDesc` <a id ="Opt50"></a>
+
+## `viTerminate` <a id ="Opt51"></a>
+
+## `viUninstallHandler` <a id ="Opt52"></a>
+
+## `viUnlock` <a id ="Opt53"></a>
+
+## `viUnmapAddress` <a id ="Opt54"></a>
+
+## `viUnmapTrigger` <a id ="Opt55"></a>
+
+## `viUsbControlIn` <a id ="Opt56"></a>
+
+## `viUsbControlOut` <a id ="Opt57"></a>
+
+## `viVPrintf` <a id ="Opt58"></a>
+
+## `viVQueryf` <a id ="Opt59"></a>
+
+## `viVScanf` <a id ="Opt60"></a>
+
+## `viVSPrintf` <a id ="Opt61"></a>
+
+## `viVSScanf` <a id ="Opt62"></a>
+
+## `viVxiCommandQuery` <a id ="Opt63"></a>
+
+## `viWaitOnEvent` <a id ="Opt64"></a>
+
+## `viWrite` <a id ="Opt65"></a>
+
+## `viWriteAsync` <a id ="Opt66"></a>
+
+## `viWriteFromFile` <a id ="Opt67"></a>
+
 
