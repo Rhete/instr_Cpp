@@ -59,6 +59,7 @@ void ErrCodePrt(ViStatus status){
         printf("未知的错误类型\n");
         break;
     }
+    system("pause");
     return ;
 }
 
@@ -75,7 +76,6 @@ int main()
     {
         printf("Could not open a session to the VISA Resource Manager!\n");
         ErrCodePrt(status);
-        system("pause");
         exit (EXIT_FAILURE);
     }  
 
@@ -86,9 +86,10 @@ int main()
     {
         printf("Could not start a session to %s!\n", VNA_Rsrc);
         ErrCodePrt(status);
-        system("pause");
         exit (EXIT_FAILURE);
     }
+
+    
     
     system("pause");
     return 0;

@@ -123,7 +123,7 @@ viUninstallHandler()
 |[`viMoveAsync`](#Opt29)||
 |[`viMoveIn8`/<br>`viMoveIn16`/<br>`viMoveIn32`](#Opt30)||
 |[`viMoveOut8`/<br>`viMoveOut16`/<br>`viMoveOut32`](#Opt31)||
-|[**`viOpen`**](#Opt32)||
+|[**`viOpen`**](#Opt32)|`ViStatus viOpen(ViSession sesn, ViRsrc, rsrcName, ViAccessMode accessMode, ViUInt32 openTimeout, ViPSession vi)`|打开与指定资源的会话|
 |[**`viOpenDefaultRM`**](#Opt33)||
 |[`viOut8`/`viOut16`/<br>`viOut32`](#Opt34)||
 |[`viParseRsrc`](#Opt35)||
@@ -165,7 +165,7 @@ viUninstallHandler()
 
 插入具体的中断或信号
 
-**C code**
+### **C code**
 ``` C 
 Vistatus = viAssertIntrSignal(ViSession vi, ViInt16 mode, ViUInt32 statusID)
 ```
@@ -214,97 +214,222 @@ Vistatus = viAssertIntrSignal(ViSession vi, ViInt16 mode, ViUInt32 statusID)
 
 ## `viClose` <a id="Opt7"></a>
 
+关闭指定的会话、事件或查找表
+
+### **C code**
+```C
+ViStatus viClose(ViObject vi)
+```
+
+### 参数
+||参数名||传递方向||描述||
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+||`vi`||入||会话、事件或查找表的唯一标识符||
+
+### 返回值
+||完成代码||描述||
+|:-:|:-:|:-:|:-:|:-:|
+||`VI_SUCCESS`|&emsp;|成功关闭会话||
+||`VI_WARN_NULL_OBJECT`||指定的对象尚未初始化||
+
+||错误代码||描述||
+|:-:|:-:|:-:|:-:|:-:|
+||`VI_ERROR_INV_OBJECT`|&emsp;|给定的对象引用无效||
+||`VI_ERROR_CLOSING_FAILED`||无法取消分配会话或对象引用分配的数据结构||
+
+### 描述
+`viClose()`操作关闭会话、事件或查找表。这个过程中，所有被分配给**`vi`**的数据结构将被释放。针对VISA资源管理器的会话使用此操作将关闭与该资源管理器相关的所有I/O会话。
+
 ## `viDisableEvent` <a id ="Opt8"></a>
+
+
 
 ## `viDiscardEvents` <a id ="Opt9"></a>
 
+
+
 ## `viEnableEvent` <a id ="Opt10"></a>
+
+
 
 ## `viEventHandler` <a id ="Opt11"></a>
 
+
+
 ## `viFindNext` <a id ="Opt12"></a>
+
+
 
 ## `viFindRsrc` <a id ="Opt13"></a>
 
+
+
 ## `viFlush` <a id ="Opt14"></a>
+
+
 
 ## `viGetAttribute` <a id ="Opt15"></a>
 
+
+
 ## `viGpibCommand` <a id ="Opt16"></a>
+
+
 
 ## `viGpibControlATN` <a id ="Opt17"></a>
 
+
+
 ## `viGpibControlREN` <a id ="Opt18"></a>
+
+
 
 ## `viGpibPassControl` <a id ="Opt19"></a>
 
+
+
 ## `viGpibSendIFC` <a id ="Opt20"></a>
+
+
 
 ## `viIn8/viIn16/viIn32` <a id ="Opt21"></a>
 
+
+
 ## `viInstallHandler` <a id ="Opt22"></a>
+
+
 
 ## `viLock` <a id ="Opt23"></a>
 
+
+
 ## `viMapAddress` <a id ="Opt24"></a>
+
+
 
 ## `viMapTrigger` <a id ="Opt25"></a>
 
+
+
 ## `viMemAlloc` <a id ="Opt26"></a>
+
+
 
 ## `viMemFree` <a id ="Opt27"></a>
 
+
+
 ## `viMove` <a id ="Opt28"></a>
+
+
 
 ## `viMoveAsync` <a id ="Opt29"></a>
 
+
+
 ## `viMoveIn8/viMoveIn16/viMoveIn32` <a id ="Opt30"></a>
+
+
 
 ## `viMoveOut8/viMoveOut16/viMoveOut32` <a id ="Opt31"></a>
 
+
+
 ## **`viOpen`** <a id ="Opt32"></a>
+
+打开与指定资源的会话
+
+### **C code**
+```C
+ViStatus viOpen(ViSession sesn, ViRsrc, rsrcName, ViAccessMode accessMode, ViUInt32 openTimeout, ViPSession vi)
+```
+
+### 参数
 
 ## **`viOpenDefaultRM`** <a id ="Opt33"></a>
 
+
+
 ## `viOut8/viOut16/viOut32` <a id ="Opt34"></a>
+
+
 
 ## `viParseRsrc` <a id ="Opt35"></a>
 
+
+
 ## `viParseRsrcEx` <a id ="Opt36"></a>
+
+
 
 ## `viPeek8/viPeek16/viPeek32` <a id ="Opt37"></a>
 
+
+
 ## `viPoke8/viPoke16/viPike32` <a id ="Opt38"></a>
+
+
 
 ## `viPrintf` <a id ="Opt39"></a>
 
+
+
 ## `viQueryf` <a id ="Opt40"></a>
+
+
 
 ## `viRead` <a id ="Opt41"></a>
 
+
+
 ## `viReadAsync` <a id ="Opt42"></a>
+
+
 
 ## `viReadSTB` <a id ="Opt43"></a>
 
+
+
 ## `viReadToFile` <a id ="Opt44"></a>
+
+
 
 ## `viScanf` <a id ="Opt45"></a>
 
+
+
 ## `viSetAttribute` <a id ="Opt46"></a>
+
+
 
 ## `viSetBuf` <a id ="Opt47"></a>
 
+
+
 ## `viSPrintf` <a id ="Opt48"></a>
+
+
 
 ## `viSScanf` <a id ="Opt49"></a>
 
+
+
 ## `viStatusDesc` <a id ="Opt50"></a>
+
+
 
 ## `viTerminate` <a id ="Opt51"></a>
 
+
+
 ## `viUninstallHandler` <a id ="Opt52"></a>
 
+
+
 ## `viUnlock` <a id ="Opt53"></a>
+
+
 
 ## `viUnmapAddress` <a id ="Opt54"></a>
 
