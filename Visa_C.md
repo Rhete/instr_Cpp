@@ -88,7 +88,8 @@ viUninstallHandler()
 
 # 操作
 
-## 操作总表
+## 操作目录
+**API提供的所有操作**
 |<center>操作名</center>|<center>操作方法</center>|操作内容|
 |:-|:-|:-:|
 |[`viAssertIntrSignal`](#Opt1) |`ViStatus = ViAssertIntrSignal(ViSession vi, Vint16 mode, ViUint32 statusID)`|插入给定的中断或信号
@@ -105,14 +106,14 @@ viUninstallHandler()
 |[`viFindNext`](#Opt12)|`ViStatus viFindNext(ViFindList findList, ViChar instrDesc[])`|返回从上次用`viFindRsrc()`获取的资源列表的下一个资源|
 |[`viFindRsrc`](#Opt13)|`ViStatus viFindRsrc(ViSession sesn, ViString expr, ViPFindList findList, ViPUInt32 retcnt, ViChar instrDesc[])`|询问VISA系统，定位经过特定的接口的资源
 |[**`viFlush`**](#Opt14)|`ViStatus viFlush(ViSession vi, ViUInt16 mask)`|手动清空指定的格式化I/O操作或串口通信的缓存
-|[`viGetAttribute`](#Opt15)||
-|[`viGpibCommand`](#Opt16)||
-|[`viGpibControlATN`](#Opt17)||
-|[`viGpibControlREN`](#Opt18)||
-|[`viGpibPassControl`](#Opt19)||
-|[`viGpibSendIFC`](#Opt20)||
-|[`viIn8`/`viIn16`/`viIn32`](#Opt21)||
-|[`viInstallHandler`](#Opt22)||
+|[`viGetAttribute`](#Opt15)|`ViStatus viGetAttribute(ViObject vi, ViAttr attribute, void * attrState)`|获取属性状态
+|[`viGpibCommand`](#Opt16)|`ViStatus viGpibCommand(ViSession vi, ViBuf buf, ViUInt32 count, ViPUInt32 retCount)`|向总线写入GPIB命令码
+|[`viGpibControlATN`](#Opt17)|`ViStatus viGpibControlATN(ViSession vi, ViUInt16 mode)`|指明ATN线和bending主动控制器的状态
+|[`viGpibControlREN`](#Opt18)|`ViStatus viGpibControlREN(ViSession vi, ViUInt16 mode)`|控制GPIB的远端使能接口线，或设备的远端/本地状态（可选）
+|[`viGpibPassControl`](#Opt19)|`ViStatus viGpibPassControl(ViSession vi, ViUInt16 primAddr, ViUInt16 secAddr)`|告诉指定地址的GPIB设备成为主控制器（Controller in Charge, CIC）
+|[`viGpibSendIFC`](#Opt20)|`ViStatus viGpibSendIFC(ViSession vi)`|给接口清除线一个至少100毫秒的脉冲
+|[`viIn8`/`viIn16`/`viIn32`](#Opt21)|`ViStatus viInt8(ViSession vi, ViUInt16 space, ViBusAddress offset, ViPUInt8 val8)`<br>`ViStatus viInt16(ViSession vi, ViUInt16 space, ViBusAddress offset, ViPUInt16 val16)`<br>`ViStatus viIn32(ViSession vi, ViUInt16 space, ViBusAddress offset, ViPUInt32 val32)`|从指定内存空间或偏移处读取8-bit、16-bit或32-bit数据
+|[`viInstallHandler`](#Opt22)|`ViStatus viInstallHandler(ViSession vi, ViEventType eventType, ViHndlr handler, ViAddr userHandle)`|安装句柄，用于事件回调|
 |[`viLock`](#Opt23)||
 |[`viMapAddress`](#Opt24)||
 |[`viMapTrigger`](#Opt25)||

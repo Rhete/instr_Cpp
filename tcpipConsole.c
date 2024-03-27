@@ -17,7 +17,7 @@
 /* -l dependencies  */
 
 static ViStatus status;
-static ViSession defaultRM, instr1;
+static ViSession defaultRM, VNA;
 
 void ErrCodePrt(ViStatus status){
     switch (status)
@@ -73,7 +73,9 @@ int main()
         exit (EXIT_FAILURE);
     }  
 
-    status = viOpen(defaultRM, ViConstRsrc_name, ViAccessMode_mode, ViUInt32_timeout, ViPSession_vi);
+    //Open a vi Session
+    ViConstRsrc VNA_Rsrc = "tcpip::192.168.6.3::INSTR";
+    status = viOpen(defaultRM, VNA_Rsrc, VI_NULL, 20, &VNA);
     if(status < VI_SUCCESS)
     {
         printf("Could not open instrument!\n");
