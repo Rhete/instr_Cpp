@@ -35,7 +35,7 @@ int main(void)
    status = viOpen (defaultRM, "TCPIP0::ftp.ni.com::21::SOCKET", VI_NULL, VI_NULL, &instr);
    if (status < VI_SUCCESS)
    {
-      printf ("An error occurred opening the session to TCPIP0::ftp.ni.com::21::SOCKET\n");
+      printf ("An error occurred opening the session to %s\n", "TCPIP0::ftp.ni.com::21::SOCKET");
       viClose(defaultRM);
       exit (EXIT_FAILURE);
    }

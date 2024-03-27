@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 
 #include <visa.h> // importance headlers
 /* for a successful compile, Library Directories and Additional Dependencies are necessary. */
@@ -65,22 +66,30 @@ void ErrCodePrt(ViStatus status){
 
 int main()
 {
+
+    SetConsoleOutputCP( CP_UTF8 );
+
     // open default resource maneger
     status = viOpenDefaultRM (&defaultRM);
     if (status < VI_SUCCESS)
     {
         printf("Could not open a session to the VISA Resource Manager!\n");
+        ErrCodePrt(status);
+        system("pause");
         exit (EXIT_FAILURE);
     }  
 
     //Open a vi Session
-    ViConstRsrc VNA_Rsrc = "tcpip::192.168.6.3::INSTR";
+    ViConstRsrc VNA_Rsrc = "TCPIP0::K-E5080B-01675::inst0::INSTR";
     status = viOpen(defaultRM, VNA_Rsrc, VI_NULL, 20, &VNA);
     if(status < VI_SUCCESS)
     {
-        printf("Could not open instrument!\n");
+        printf("Could not start a session to %s!\n", VNA_Rsrc);
+        ErrCodePrt(status);
+        system("pause");
         exit (EXIT_FAILURE);
     }
     
+    system("pause");
     return 0;
 }
