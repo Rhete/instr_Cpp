@@ -186,7 +186,7 @@ viUninstallHandler()
 |[`viWriteFromFile`](#Opt67)||
 
 
-## `viAssertIntrSignal`<a id="Opt1"> </a>
+## `viAssertIntrSignal`  <a id="Opt1"> </a>
 
 插入具体的中断或信号
 
@@ -449,7 +449,24 @@ ViStatus viClose(ViObject vi)
 ## `viMoveOut8/viMoveOut16/viMoveOut32` <a id ="Opt31"></a>
 
 
+### 返回值
+||完成代码||描述||
+|:-:|:--:|:-:|:-:|:-:|
+||`VI_SUCCESS`|&emsp;|会话成功打开|
 
+||错误代码||描述||
+|:-:|:-:|:-:|:-:|:-:|
+||`VI_ERROR_INV_OBJECT`|&emsp;|指定的会话引用不存在||
+||`VI_ERROR_NSUP_OPER`||给定的`vi`不支持此操作||
+||`VI_ERROR_RSRC_LOCKED`||无法完成指定操作，`vi`资源对该访问锁定||
+||`VI_ERROR_BERR`||传输中出现总线错误||
+||`VI_ERROR_INV_SPACE`||指定地址空间无效||
+||`VI_ERROR_INV_OFFSET`||指定偏移无限||
+||`VI_ERROR_NSUP_OFFSET`||硬件无法访问指定偏移||
+||`VI_ERROR_NSUP_WIDTH`||硬件不支持指定位宽||
+||`VI_ERROR_INV_LENGTH`||指定长度无效||
+||`VI_ERROR_NSUP_ALIGN_OFFSET`||指定偏移和操作访问宽度未对齐||
+||`VI_ERROR_INV_SETUP`||设置无效，无法开始操作。检查属性状态是否设置一致||
 
 <p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
@@ -476,7 +493,83 @@ ViStatus viOpen(ViSession sesn, ViRsrc, rsrcName, ViAccessMode accessMode, ViUIn
 |:-:|:--:|:-:|:-:|:-:|
 ||`VI_SUCCESS`|&emsp;|会话成功打开|
 ||`VI_SUCCESS_DEV_NPRESENT`||会话成功打开，但指定地址的设备无回应|
-||`VI_WARN_CONFIG_NLOADED`||
+||`VI_WARN_CONFIG_NLOADED`||指定配置不存在或无法加载，使用默认配置|
+
+||错误代码||描述||
+|:-:|:-:|:-:|:-:|:-:|
+||`VI_ERROR_INV_OBJECT`|&emsp;|指定的会话引用不存在||
+||`VI_ERROR_NSUP_OPER`||给定的`vi`不支持此操作||
+||`VI_ERROR_RSRC_LOCKED`||无法完成指定操作，`vi`资源对该访问锁定||
+||`VI_ERROR_INV_ACC_MODE`||无效访问模式||
+||`VI_ERROR_RSRC_NFOUND`||地址信息不足或资源未在系统中显示||
+||`VI_ERROR_ALLOC`||系统资源不足，无法开启会话||
+||`VI_ERROR_RSRC_BUSY`||资源正忙，无法访问||
+||`VI_ERROR_RSRC_LOCKED`||资源已锁定且锁定方式与指定方式冲突||
+||`VI_ERROR_TMO`||会话开启超时||
+||`VI_ERROR_LIBRARY_NFOUND`||无法打开VISA所需要的库||
+||`VI_ERROR_INTF_NUM_NCONFIG`||接口类型有效，但指定接口号未配置||
+||`VI_ERROR_MACHINE_NAVAIL`||远端机器不存在或不接受任何链接。若NI-VISA服务器已在远端机器安装和运行，可能是由于该服务版本不兼容或监听其他端口||
+||`VI_ERROR_NPERMISSION`||远端机器拒绝访问||
+
+### 描述
+
+`viOpen()`操作打开与指定资源的会话。该操作返回一个会话指示，该指示可以用于调取这个资源的其他操作。向该函数传递的地址字符串必须唯一指示一种资源。下表表明了地址字符串的语法。可选字符段用方括号括起（[]）。
+
+|接口|格式|
+|:-:|:-:|
+|VXI INSTR|```VXI[board]::VXI logical address[::INSTR]```|
+|VXI MEMACC|`VXI[board]::MEMACC`|
+|VXI BACKPLANE|`VXI[board][::mainframe logical address]::BACKPLANE`|
+|VXI SERVANT|`VXI[board]::SERVANT`|
+|GPIB-VXI INSTR|`GPIB-VXI[board]::VXI logical address[::INSTR]`|
+|GPIB-VXI MEMACC|`GPIB-VXI[board]::MEMACC`|
+|GPIB-VXI BACKPLANE|`GPIB_VXI[board][::mainform logical address]::BACKPLANE`|
+|GPIB INSTR|`GPIB[board]::primary address[::secondary address][::INSTR]`|
+|GPIB INTFC|`GPIB[board]::INTFC`|
+|GPIB SERVANT|`GPIB[board]::SERVANT`|
+|PXI INSTR|`PXI[bus]::device[::function][::INSTR]`|
+|PXI INSTR|`PXI[interface]::[bus-]device[.function][::INSTR]`|
+|PXI MEMACC|`PXI[interface]::MEMACC`|
+|Serial INSTR|`ASRL[board][::INSTR]`|
+|TCPIP INSTR|`TCPIP[board]::host address[::LAN device name][::INSTR]`|
+|TCPIP SOCKET|`TCPIP[board]::host address::port::SOCKET`|
+|USB INSTR|`USB[board]::manufacturer ID::modelcode::serial number[::USB interfacenumber][::INSTR]`|
+|USB RAW|`USB[board]::manufacturer ID::modelcode::serial number[::USB interfacenumber]::RAW`|
+
+<center><b> 关键字和资源的对应关系 </b></center>
+
+||关键字||资源||
+|:-:|:-:|:-:|:-:|:-:|
+||`GPIB`|&emsp;|GPIB||
+||`VXI`||embedded、MXIbus、1394 controllers||
+||`GPIB-VXI`||GPIB-VXI controller||
+||`ARSL`||异步串口（RS-232, RS-485）||
+||`PXI`||PXI PCI||
+||`TCPIP`||以太网||
+
+下表给出了可选字符段的默认值
+||可选字符段||默认值||
+|:-:|:-:|:-:|:-:|:-:|
+||`board`|&emsp;|0||
+||`GPIB secondary address`||none||
+||`LAN device name`||inst0||
+||`PXI bux`||0||
+||`PXI function`||0||
+||`USB interface number`||lowest numbered relevant interface||
+
+下表给出了地址字符的一些例子
+
+||地址字符||描述||
+|:-:|:-:|:-:|:-:|:-:|
+||`GPIB::1::0::INSTR`|&emsp;|GPIB设备，首要地址为1，次要地址为0，接口为0||
+||`ASRL1::INSTR`||连接在ARSL1的串口设备||
+||`VXI::MEMACC`||板卡级VXI接口寄存器访问权限||
+||`GPIB-VXI1::MEMACC`||板卡级GPBI-VXI接口寄存器访问权限||
+||`GPIB2::INTFC`||GPIB接口2的接口或原始资源||
+||`VXI::1::BACKPLANE`||默认VXI系统接口（0）上的插槽1的主框架资源||
+||`GPIB-VXI2::BACKPLANE`||
+
+
 
 <p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
@@ -593,3 +686,12 @@ ViStatus viOpen(ViSession sesn, ViRsrc, rsrcName, ViAccessMode accessMode, ViUIn
 ## `viWriteFromFile` <a id ="Opt67"></a>
 
 
+# 状态码
+
+<center><b>表 A-1. 完成代码</b></center>
+
+|<center> 完成码 </center> |<center>值</center>|<center>含义</center>|
+|:-|:-|:-|
+|`VI_SUCCESS`|0|操作成功完成|
+|`VI_SUCCESS_EVENT_EN`|3FFF0002|指定的事件中至少已经使能一种指定的机制|
+|`VI_SUCCESS_EVENT_DIS`|
