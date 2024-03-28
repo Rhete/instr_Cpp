@@ -1,4 +1,106 @@
-# introduction
+[//]: VISA API 手册中文整理
+- [简介](#简介)
+  - [VISA需要的软硬件](#visa需要的软硬件)
+  - [VXI*plug\&play* 概述](#vxiplugplay-概述)
+  - [支持的平台](#支持的平台)
+- [VISA API 概述](#visa-api-概述)
+  - [VISA 访问机制](#visa-访问机制)
+    - [属性](#属性)
+    - [事件](#事件)
+    - [操作](#操作)
+  - [VISA 资源种类](#visa-资源种类)
+    - [INSTR](#instr)
+    - [MEMACC](#memacc)
+    - [INTFC](#intfc)
+    - [BACKPLANE](#backplane)
+    - [SERVANT](#servant)
+    - [SOCKET](#socket)
+    - [RAW](#raw)
+- [属性](#属性-1)
+- [事件](#事件-1)
+- [操作](#操作-1)
+  - [操作目录](#操作目录)
+  - [`viAssertIntrSignal`](#viassertintrsignal)
+    - [**C code**](#c-code)
+    - [参数](#参数)
+    - [返回值](#返回值)
+    - [描述](#描述)
+  - [`viAssertTrigger` ](#viasserttrigger-)
+  - [`viAssertUtilSignal` ](#viassertutilsignal-)
+  - [`viBufRead` ](#vibufread-)
+  - [`viBufWrite` ](#vibufwrite-)
+  - [`viClear` ](#viclear-)
+  - [`viClose` ](#viclose-)
+    - [**C code**](#c-code-1)
+    - [参数](#参数-1)
+    - [返回值](#返回值-1)
+    - [描述](#描述-1)
+  - [`viDisableEvent` ](#vidisableevent-)
+  - [`viDiscardEvents` ](#vidiscardevents-)
+  - [`viEnableEvent` ](#vienableevent-)
+  - [`viEventHandler` ](#vieventhandler-)
+  - [`viFindNext` ](#vifindnext-)
+  - [`viFindRsrc` ](#vifindrsrc-)
+  - [`viFlush` ](#viflush-)
+  - [`viGetAttribute` ](#vigetattribute-)
+  - [`viGpibCommand` ](#vigpibcommand-)
+  - [`viGpibControlATN` ](#vigpibcontrolatn-)
+  - [`viGpibControlREN` ](#vigpibcontrolren-)
+  - [`viGpibPassControl` ](#vigpibpasscontrol-)
+  - [`viGpibSendIFC` ](#vigpibsendifc-)
+  - [`viIn8/viIn16/viIn32` ](#viin8viin16viin32-)
+  - [`viInstallHandler` ](#viinstallhandler-)
+  - [`viLock` ](#vilock-)
+  - [`viMapAddress` ](#vimapaddress-)
+  - [`viMapTrigger` ](#vimaptrigger-)
+  - [`viMemAlloc` ](#vimemalloc-)
+  - [`viMemFree` ](#vimemfree-)
+  - [`viMove` ](#vimove-)
+  - [`viMoveAsync` ](#vimoveasync-)
+  - [`viMoveIn8/viMoveIn16/viMoveIn32` ](#vimovein8vimovein16vimovein32-)
+  - [`viMoveOut8/viMoveOut16/viMoveOut32` ](#vimoveout8vimoveout16vimoveout32-)
+  - [**`viOpen`** ](#viopen-)
+    - [**C code**](#c-code-2)
+    - [参数](#参数-2)
+    - [返回值](#返回值-2)
+  - [**`viOpenDefaultRM`** ](#viopendefaultrm-)
+  - [`viOut8/viOut16/viOut32` ](#viout8viout16viout32-)
+  - [`viParseRsrc` ](#viparsersrc-)
+  - [`viParseRsrcEx` ](#viparsersrcex-)
+  - [`viPeek8/viPeek16/viPeek32` ](#vipeek8vipeek16vipeek32-)
+  - [`viPoke8/viPoke16/viPike32` ](#vipoke8vipoke16vipike32-)
+  - [`viPrintf` ](#viprintf-)
+  - [`viQueryf` ](#viqueryf-)
+  - [`viRead` ](#viread-)
+  - [`viReadAsync` ](#vireadasync-)
+  - [`viReadSTB` ](#vireadstb-)
+  - [`viReadToFile` ](#vireadtofile-)
+  - [`viScanf` ](#viscanf-)
+  - [`viSetAttribute` ](#visetattribute-)
+  - [`viSetBuf` ](#visetbuf-)
+  - [`viSPrintf` ](#visprintf-)
+  - [`viSScanf` ](#visscanf-)
+  - [`viStatusDesc` ](#vistatusdesc-)
+  - [`viTerminate` ](#viterminate-)
+  - [`viUninstallHandler` ](#viuninstallhandler-)
+  - [`viUnlock` ](#viunlock-)
+  - [`viUnmapAddress` ](#viunmapaddress-)
+  - [`viUnmapTrigger` ](#viunmaptrigger-)
+  - [`viUsbControlIn` ](#viusbcontrolin-)
+  - [`viUsbControlOut` ](#viusbcontrolout-)
+  - [`viVPrintf` ](#vivprintf-)
+  - [`viVQueryf` ](#vivqueryf-)
+  - [`viVScanf` ](#vivscanf-)
+  - [`viVSPrintf` ](#vivsprintf-)
+  - [`viVSScanf` ](#vivsscanf-)
+  - [`viVxiCommandQuery` ](#vivxicommandquery-)
+  - [`viWaitOnEvent` ](#viwaitonevent-)
+  - [`viWrite` ](#viwrite-)
+  - [`viWriteAsync` ](#viwriteasync-)
+  - [`viWriteFromFile` ](#viwritefromfile-)
+
+
+# 简介
 
 介绍VISA使用时需要的内容。简单介绍了VXIplug&play的功能和特性。
 
@@ -77,9 +179,28 @@ viUninstallHandler()
 
 **内存共享**服务可以实现在一个只被给定会话使用的特定设备上分配内存。这通常只在那些专门为此目的导出共享内存的设备上可用，例如**VXIbus**或**VMEbus**控制器。
 
+### MEMACC
+
+### INTFC
+
+### BACKPLANE
+
+### SERVANT
+
+### SOCKET
+
+### RAW
+
 # 属性
 
-敬请期待
+以字母表顺序给出了属性描述，包括属性支持的资源类型，访问权限，数据类型，值区间和默认值
+
+<center><b>属性列表</b></center>
+
+|属性名|访问权限|数据类型|描述|
+|:-:|:-:|:-:|:-:|
+|`VI_ATTR_4882_COMPLIANT`|全局&emsp;只读|`ViBoolean`|表明设备是否是488.2兼容的|
+
 
 # 事件
 
@@ -88,8 +209,9 @@ viUninstallHandler()
 
 # 操作
 
-## 操作目录
-**API提供的所有操作**
+## 操作目录 
+<center> <b>API提供的所有操作</b> <a id="OptIndex"></a> </center>
+
 |<center>操作名</center>|<center>操作方法</center>|操作内容|
 |:-|:-|:-:|
 |[`viAssertIntrSignal`](#Opt1) |`ViStatus = ViAssertIntrSignal(ViSession vi, Vint16 mode, ViUint32 statusID)`|插入给定的中断或信号
@@ -202,15 +324,32 @@ Vistatus = viAssertIntrSignal(ViSession vi, ViInt16 mode, ViUInt32 statusID)
 ||`VI_ASSERT_SIGNAL`||通过**VXI**信号发送通知||
 ||`VI_ASSERT_IRQ1` –<br>`VI_ASSERT_IRQ7`||通过指定的**VXI/VME IRQ**线路发送中断信号，该命令使用了标准的**VXI/VME ROAK**中断机制，而不是更老的**VME RORA**机制||
 
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
+
 ## `viAssertTrigger` <a id="Opt2"></a>
+
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
 ## `viAssertUtilSignal` <a id="Opt3"></a>
 
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
+
 ## `viBufRead` <a id="Opt4"></a>
+
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
 ## `viBufWrite` <a id="Opt5"></a>
 
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
+
 ## `viClear` <a id="Opt6"></a>
+
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
 ## `viClose` <a id="Opt7"></a>
 
@@ -240,101 +379,176 @@ ViStatus viClose(ViObject vi)
 ### 描述
 `viClose()`操作关闭会话、事件或查找表。这个过程中，所有被分配给**`vi`**的数据结构将被释放。针对VISA资源管理器的会话使用此操作将关闭与该资源管理器相关的所有I/O会话。
 
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
+
 ## `viDisableEvent` <a id ="Opt8"></a>
 
 
+
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
 ## `viDiscardEvents` <a id ="Opt9"></a>
 
 
 
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
+
 ## `viEnableEvent` <a id ="Opt10"></a>
 
 
+
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
 ## `viEventHandler` <a id ="Opt11"></a>
 
 
 
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
+
 ## `viFindNext` <a id ="Opt12"></a>
 
 
+
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
 ## `viFindRsrc` <a id ="Opt13"></a>
 
 
 
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
+
 ## `viFlush` <a id ="Opt14"></a>
 
 
+
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
 ## `viGetAttribute` <a id ="Opt15"></a>
 
 
 
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
+
 ## `viGpibCommand` <a id ="Opt16"></a>
 
 
+
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
 ## `viGpibControlATN` <a id ="Opt17"></a>
 
 
 
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
+
 ## `viGpibControlREN` <a id ="Opt18"></a>
 
 
+
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
 ## `viGpibPassControl` <a id ="Opt19"></a>
 
 
 
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
+
 ## `viGpibSendIFC` <a id ="Opt20"></a>
 
 
+
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
 ## `viIn8/viIn16/viIn32` <a id ="Opt21"></a>
 
 
 
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
+
 ## `viInstallHandler` <a id ="Opt22"></a>
 
 
+
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
 ## `viLock` <a id ="Opt23"></a>
 
 
 
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
+
 ## `viMapAddress` <a id ="Opt24"></a>
 
 
+
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
 ## `viMapTrigger` <a id ="Opt25"></a>
 
 
 
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
+
 ## `viMemAlloc` <a id ="Opt26"></a>
 
 
+
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
 ## `viMemFree` <a id ="Opt27"></a>
 
 
 
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
+
 ## `viMove` <a id ="Opt28"></a>
 
 
+
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
 ## `viMoveAsync` <a id ="Opt29"></a>
 
 
 
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
+
 ## `viMoveIn8/viMoveIn16/viMoveIn32` <a id ="Opt30"></a>
 
 
 
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
+
 ## `viMoveOut8/viMoveOut16/viMoveOut32` <a id ="Opt31"></a>
 
 
+
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
 ## **`viOpen`** <a id ="Opt32"></a>
 
@@ -346,6 +560,22 @@ ViStatus viOpen(ViSession sesn, ViRsrc, rsrcName, ViAccessMode accessMode, ViUIn
 ```
 
 ### 参数
+||参数名||传递方向||描述||
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+||`sesn`|&emsp;|入|&emsp;|资源管理器会话，必须是从`viOpenDefaultRM()`处返回的会话|
+||`rsrcName`||入||资源的唯一字符名。详见***描述***节|
+||`accessMode`||入||指定接入使用的资源模式，有效值详见***描述***节。若此参数值为`VI_NULL`，会话将采用VISA支持的默认值|
+||`openTimeout`||入||指定超时时间（单位毫秒），超时后将返回错误。此操作并不会设置I/O的超时时间，如需设置，需要调用`viSetAttribute()`设置`VI_ATTR_TMO_VALUE`属性|
+||`vi`||出||会话唯一逻辑指示器|
+
+### 返回值
+||完成代码||描述||
+|:-:|:--:|:-:|:-:|:-:|
+||`VI_SUCCESS`|&emsp;|会话成功打开|
+||`VI_SUCCESS_DEV_NPRESENT`||会话成功打开，但指定地址的设备无回应|
+||`VI_WARN_CONFIG_NLOADED`||
+
+<p align = "right"><a href = "#OptIndex">返回目录</a> </p>
 
 ## **`viOpenDefaultRM`** <a id ="Opt33"></a>
 
