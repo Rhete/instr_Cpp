@@ -1,104 +1,7 @@
-[//]: VISA API 手册中文整理
-- [简介](#简介)
-  - [VISA需要的软硬件](#visa需要的软硬件)
-  - [VXI*plug\&play* 概述](#vxiplugplay-概述)
-  - [支持的平台](#支持的平台)
-- [VISA API 概述](#visa-api-概述)
-  - [VISA 访问机制](#visa-访问机制)
-    - [属性](#属性)
-    - [事件](#事件)
-    - [操作](#操作)
-  - [VISA 资源种类](#visa-资源种类)
-    - [INSTR](#instr)
-    - [MEMACC](#memacc)
-    - [INTFC](#intfc)
-    - [BACKPLANE](#backplane)
-    - [SERVANT](#servant)
-    - [SOCKET](#socket)
-    - [RAW](#raw)
-- [属性](#属性-1)
-- [事件](#事件-1)
-- [操作](#操作-1)
-  - [操作目录](#操作目录)
-  - [`viAssertIntrSignal`](#viassertintrsignal)
-    - [**C code**](#c-code)
-    - [参数](#参数)
-    - [返回值](#返回值)
-    - [描述](#描述)
-  - [`viAssertTrigger` ](#viasserttrigger-)
-  - [`viAssertUtilSignal` ](#viassertutilsignal-)
-  - [`viBufRead` ](#vibufread-)
-  - [`viBufWrite` ](#vibufwrite-)
-  - [`viClear` ](#viclear-)
-  - [`viClose` ](#viclose-)
-    - [**C code**](#c-code-1)
-    - [参数](#参数-1)
-    - [返回值](#返回值-1)
-    - [描述](#描述-1)
-  - [`viDisableEvent` ](#vidisableevent-)
-  - [`viDiscardEvents` ](#vidiscardevents-)
-  - [`viEnableEvent` ](#vienableevent-)
-  - [`viEventHandler` ](#vieventhandler-)
-  - [`viFindNext` ](#vifindnext-)
-  - [`viFindRsrc` ](#vifindrsrc-)
-  - [`viFlush` ](#viflush-)
-  - [`viGetAttribute` ](#vigetattribute-)
-  - [`viGpibCommand` ](#vigpibcommand-)
-  - [`viGpibControlATN` ](#vigpibcontrolatn-)
-  - [`viGpibControlREN` ](#vigpibcontrolren-)
-  - [`viGpibPassControl` ](#vigpibpasscontrol-)
-  - [`viGpibSendIFC` ](#vigpibsendifc-)
-  - [`viIn8/viIn16/viIn32` ](#viin8viin16viin32-)
-  - [`viInstallHandler` ](#viinstallhandler-)
-  - [`viLock` ](#vilock-)
-  - [`viMapAddress` ](#vimapaddress-)
-  - [`viMapTrigger` ](#vimaptrigger-)
-  - [`viMemAlloc` ](#vimemalloc-)
-  - [`viMemFree` ](#vimemfree-)
-  - [`viMove` ](#vimove-)
-  - [`viMoveAsync` ](#vimoveasync-)
-  - [`viMoveIn8/viMoveIn16/viMoveIn32` ](#vimovein8vimovein16vimovein32-)
-  - [`viMoveOut8/viMoveOut16/viMoveOut32` ](#vimoveout8vimoveout16vimoveout32-)
-  - [**`viOpen`** ](#viopen-)
-    - [**C code**](#c-code-2)
-    - [参数](#参数-2)
-    - [返回值](#返回值-2)
-  - [**`viOpenDefaultRM`** ](#viopendefaultrm-)
-  - [`viOut8/viOut16/viOut32` ](#viout8viout16viout32-)
-  - [`viParseRsrc` ](#viparsersrc-)
-  - [`viParseRsrcEx` ](#viparsersrcex-)
-  - [`viPeek8/viPeek16/viPeek32` ](#vipeek8vipeek16vipeek32-)
-  - [`viPoke8/viPoke16/viPike32` ](#vipoke8vipoke16vipike32-)
-  - [`viPrintf` ](#viprintf-)
-  - [`viQueryf` ](#viqueryf-)
-  - [`viRead` ](#viread-)
-  - [`viReadAsync` ](#vireadasync-)
-  - [`viReadSTB` ](#vireadstb-)
-  - [`viReadToFile` ](#vireadtofile-)
-  - [`viScanf` ](#viscanf-)
-  - [`viSetAttribute` ](#visetattribute-)
-  - [`viSetBuf` ](#visetbuf-)
-  - [`viSPrintf` ](#visprintf-)
-  - [`viSScanf` ](#visscanf-)
-  - [`viStatusDesc` ](#vistatusdesc-)
-  - [`viTerminate` ](#viterminate-)
-  - [`viUninstallHandler` ](#viuninstallhandler-)
-  - [`viUnlock` ](#viunlock-)
-  - [`viUnmapAddress` ](#viunmapaddress-)
-  - [`viUnmapTrigger` ](#viunmaptrigger-)
-  - [`viUsbControlIn` ](#viusbcontrolin-)
-  - [`viUsbControlOut` ](#viusbcontrolout-)
-  - [`viVPrintf` ](#vivprintf-)
-  - [`viVQueryf` ](#vivqueryf-)
-  - [`viVScanf` ](#vivscanf-)
-  - [`viVSPrintf` ](#vivsprintf-)
-  - [`viVSScanf` ](#vivsscanf-)
-  - [`viVxiCommandQuery` ](#vivxicommandquery-)
-  - [`viWaitOnEvent` ](#viwaitonevent-)
-  - [`viWrite` ](#viwrite-)
-  - [`viWriteAsync` ](#viwriteasync-)
-  - [`viWriteFromFile` ](#viwritefromfile-)
-
+<!-- VISA API 手册中文整理 
+    md文件创建日期 2024-03-28
+    创建人 吕则霖
+-->
 
 # 简介
 
@@ -195,7 +98,7 @@ viUninstallHandler()
 
 以字母表顺序给出了属性描述，包括属性支持的资源类型，访问权限，数据类型，值区间和默认值
 
-<center><b>属性列表</b></center>
+<center><b>属性列表</b><a id="AttrIndex"></a></center>
 
 |属性名|访问权限|数据类型|描述|
 |:-:|:-:|:-:|:-:|
@@ -283,7 +186,7 @@ viUninstallHandler()
 |[`viWriteFromFile`](#Opt67)||
 
 
-## `viAssertIntrSignal`<a id="Opt1"></a>
+## `viAssertIntrSignal`<a id="Opt1"> </a>
 
 插入具体的中断或信号
 
