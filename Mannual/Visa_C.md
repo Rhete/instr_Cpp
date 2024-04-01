@@ -693,5 +693,6 @@ ViStatus viOpen(ViSession sesn, ViRsrc, rsrcName, ViAccessMode accessMode, ViUIn
 |<center> 完成码 </center> |<center>值</center>|<center>含义</center>|
 |:-|:-|:-|
 |`VI_SUCCESS`|0|操作成功完成|
-|`VI_SUCCESS_EVENT_EN`|3FFF0002|指定的事件中至少已经使能一种指定的机制|
-|`VI_SUCCESS_EVENT_DIS`|
+|`VI_SUCCESS_EVENT_EN`|3FFF0002|指定的事件中至少已使能一种指定的机制|
+|`VI_SUCCESS_EVENT_DIS`|3FFF0003|指定的事件中至少已禁用一种指定的机制|
+|`VI_SUCCESS_QUEUE_EMPTY`|3FFF0004|

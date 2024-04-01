@@ -11,14 +11,11 @@
 #include <string.h>
 #include <windows.h>
 
-#include <visa.h> // importance headlers
+#include "visa.h" // importance headlers
 /* for a successful compile, Library Directories and Additional Dependencies are necessary. */
 /* -I headlers      */
 /* -L Library       */
 /* -l dependencies  */
-
-static ViStatus status;
-static ViSession defaultRM, VNA;
 
 void ErrCodePrt(ViStatus status){
     switch (status)
@@ -67,7 +64,9 @@ void ErrCodePrt(ViStatus status){
 
 int main()
 {
-
+    static ViStatus status;
+    static ViSession defaultRM, VNA;
+    
     SetConsoleOutputCP( CP_UTF8 );
 
     // open default resource maneger
@@ -90,7 +89,7 @@ int main()
     }
 
     
-    
+    printf("Exiting\n");
     system("pause");
     return 0;
 }

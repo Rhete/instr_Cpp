@@ -10,5 +10,6 @@
 			"visatype.h": "c",
 			"limits.h": "c"
 		}
-	}
+	},
+
 }
